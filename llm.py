@@ -129,6 +129,10 @@ Question: {question}
 
 Answer the question using only the context above, with [n] citations."""
 
+
+    print("GROQ MODEL:", config.GROQ_MODEL)
+    print("GROQ KEY EXISTS:", bool(config.GROQ_API_KEY))
+
     response = client.chat.completions.create(
         model=config.GROQ_MODEL,
         messages=[

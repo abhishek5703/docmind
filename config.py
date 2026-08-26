@@ -55,4 +55,4 @@ def _get_secret(key, default=None):
 
 
 GROQ_API_KEY = _get_secret("GROQ_API_KEY")
-GROQ_MODEL = _get_secret("GROQ_MODEL", "openai/gpt-oss-120b")
+GROQ_MODEL = "llama-3.3-70b-versatile"

@@ -1,14 +1,53 @@
-# DocMind — Personal Document Q&A Assistant
+<div align="center">
+
+# 📄 DocMind
+
+**Personal Document Q&A Assistant — chat with your own PDFs and notes, grounded in real citations.**
+
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](#)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)](#)
+[![LLM](https://img.shields.io/badge/LLM-Groq%20(free%20tier)-orange)](#)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
+[![Cost](https://img.shields.io/badge/cost-%240-brightgreen)](#)
+
+</div>
 
 A RAG (Retrieval-Augmented Generation) application that lets you upload your
 own PDFs and notes, then ask questions about them in a chat interface —
-with grounded citations, hybrid search, and honest "I don't know" fallback
+with grounded citations, hybrid search, and an honest "I don't know" fallback
 when the answer isn't in your documents.
 
 Built entirely on free tools: local embeddings, a lightweight self-built
 vector store, and Groq's free-tier LLM API. No paid services, and no
 compiled dependencies that require a C++ build toolchain — everything
 installs with plain `pip install`.
+
+---
+
+## 📸 Screenshot
+
+<div align="center">
+  <img src="docs/screenshot.png" alt="DocMind chat interface showing a question, grounded answer with citations, and source documents in the sidebar" width="850">
+</div>
+
+> Replace the placeholder above with your own screenshot: save an image as
+> `docs/screenshot.png` in the repo root (create the `docs/` folder if it
+> doesn't exist yet), and it will render automatically here and on GitHub.
+> A GIF works too — just point the `src` at `docs/demo.gif` instead.
+
+---
+
+## Table of contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Setup](#setup)
+- [Deploying for free](#deploying-for-free)
+- [Project structure](#project-structure)
+- [Why no ChromaDB?](#why-no-chromadb)
+- [Talking points for interviews](#talking-points-for-interviews)
+
+---
 
 ## Features
 
@@ -26,12 +65,14 @@ installs with plain `pip install`.
    question before retrieval runs, using a simple rule (pronouns like "it"/
    "each"/"that", or very short questions, signal a follow-up) rather than
    an LLM call. An LLM-based rewrite was tried first but proved unreliable
-   on a small, fast model - it would occasionally invent a connection to
+   on a small, fast model — it would occasionally invent a connection to
    the wrong earlier topic. The deterministic rule is less flexible but
    predictable, which matters more here.
 5. **Confidence-based fallback** — if retrieval similarity is too low, the
    app says it doesn't know rather than letting the LLM hallucinate an
    answer.
+
+---
 
 ## Architecture
 
@@ -60,6 +101,8 @@ installs with plain `pip install`.
                                             ▼
                                   answer + citations (app.py)
 ```
+
+---
 
 ## Setup
 
@@ -93,26 +136,34 @@ Drop files into the `data/` folder and run:
 python ingest.py
 ```
 
+---
+
 ## Deploying for free
 
 Push this repo to GitHub, then deploy on
 [Streamlit Community Cloud](https://streamlit.io/cloud) for free. Add your
 `GROQ_API_KEY` as a secret in the app settings instead of committing `.env`.
 
+---
+
 ## Project structure
 
 ```
 docmind/
-├── app.py           # Streamlit UI, ties all features together
+├── app.py            # Streamlit UI, ties all features together
 ├── ingest.py         # PDF/text parsing, chunking, embedding, storage
-├── vectorstore.py     # Self-built numpy cosine-similarity vector store
-├── retrieval.py       # Hybrid search (vector + BM25) + confidence check
+├── vectorstore.py    # Self-built numpy cosine-similarity vector store
+├── retrieval.py      # Hybrid search (vector + BM25) + confidence check
 ├── llm.py            # Groq API calls, query reformulation, citations
-├── config.py          # All tunable settings in one place
+├── config.py         # All tunable settings in one place
 ├── requirements.txt
 ├── .env.example
+├── docs/
+│   └── screenshot.png  # ← drop your app screenshot here
 └── data/              # Uploaded documents land here
 ```
+
+---
 
 ## Why no ChromaDB?
 
@@ -124,6 +175,8 @@ similarity, keep metadata for citations) in ~80 lines of plain numpy — no
 compiler required, and it's genuinely a good interview talking point that
 you understand what a vector index does under the hood rather than treating
 it as a black box.
+
+---
 
 ## Talking points for interviews
 
@@ -138,7 +191,7 @@ it as a black box.
   hallucinates.
 - **Conversation memory**: explain the decision to replace an LLM-based
   query rewriter with a deterministic rule after testing showed the LLM
-  version was unreliable on a small/fast model - a good example of
+  version was unreliable on a small/fast model — a good example of
   choosing robustness over sophistication when it matters for correctness.
 - **What you'd improve with more time**: re-ranking with a cross-encoder,
   streaming responses, an evaluation harness (retrieval recall@k, answer

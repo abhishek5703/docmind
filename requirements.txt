@@ -1,7 +1,7 @@
-streamlit==1.38.0
-sentence-transformers==3.0.1
+streamlit>=1.40.0
+sentence-transformers>=3.0.1
 rank-bm25==0.2.2
-PyMuPDF==1.24.10
-groq==0.11.0
-python-dotenv==1.0.1
-numpy==1.26.4
+PyMuPDF>=1.25.0
+groq>=0.11.0
+python-dotenv>=1.0.1
+numpy>=1.26.4

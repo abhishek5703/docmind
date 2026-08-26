@@ -55,4 +55,7 @@ def _get_secret(key, default=None):
 
 
 GROQ_API_KEY = _get_secret("GROQ_API_KEY")
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = _get_secret(
+    "GROQ_MODEL",
+    "llama-4-scout-17b-16e-instruct"
+)

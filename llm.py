@@ -133,13 +133,22 @@ Answer the question using only the context above, with [n] citations."""
     print("GROQ MODEL:", config.GROQ_MODEL)
     print("GROQ KEY EXISTS:", bool(config.GROQ_API_KEY))
 
-    response = client.chat.completions.create(
-        model=config.GROQ_MODEL,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-        temperature=0.2,
-        max_tokens=800,
-    )
+    try:
+        response = client.chat.completions.create(
+            model=config.GROQ_MODEL,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.2,
+            max_tokens=800,
+        )
+
+    except Exception as e:
+        import streamlit as st
+
+        st.error(f"Groq error: {e}")
+        st.error(f"Model: {config.GROQ_MODEL}")
+        raise
+
     return response.choices[0].message.content.strip()

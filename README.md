@@ -134,7 +134,7 @@ built to be **honest, inspectable, and free**:
 ```mermaid
 flowchart LR
     subgraph UI["Streamlit UI — app.py"]
-        U1[Sidebar: upload & ingest]
+        U1["Sidebar: upload and ingest"]
         U2[Chat input]
         U3[Answer + citations]
     end
@@ -296,7 +296,7 @@ Retrieval always returns *something* — even for a question your documents have
 flowchart TD
     A[Fused top chunks] --> B{Best distance<br/>≤ DISTANCE_THRESHOLD?}
     B -- Yes --> C[Send to LLM<br/>with strict grounding prompt]
-    B -- No --> D[Return honest fallback:<br/>"I don't know — not in your documents"]
+    B -- No --> D["Return honest fallback:<br/>#quot;I don't know, not in your documents#quot;"]
 ```
 
 | Threshold | Behaviour | Risk |

@@ -642,27 +642,7 @@ Not out of the box — scanned PDFs are images with no text layer. Adding an OCR
 
 ---
 
-## Talking points for interviews
 
-- **Chunking strategy** — why paragraph/sentence-aware chunking with overlap
-  beats naive fixed-size splitting (no mid-sentence cuts, context preserved
-  across boundaries).
-- **Hybrid retrieval** — why pure vector search misses exact-match queries
-  (names, IDs, dates), and how BM25 + Reciprocal Rank Fusion fixes that
-  without a re-ranker model.
-- **Confidence fallback** — the trade-off in picking a distance threshold:
-  too strict refuses valid questions, too loose hallucinates.
-- **Conversation memory** — replacing an LLM-based query rewriter with a
-  deterministic rule after testing showed the LLM version was unreliable on
-  a small/fast model — robustness over sophistication when correctness
-  matters.
-- **Vector store from scratch** — what an index actually does (normalize,
-  dot product, top-k, metadata lookup) and when brute force is the right
-  call versus approximate-nearest-neighbour structures like HNSW.
-- **Grounding & citations** — how page-level metadata flows from ingestion
-  all the way to the `[n]` markers in the final answer.
-- **Privacy by design** — local embeddings and retrieval, with only the
-  minimal context sent to the LLM.
 
 <br>
 

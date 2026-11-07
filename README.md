@@ -640,7 +640,7 @@ Not out of the box — scanned PDFs are images with no text layer. Adding an OCR
 
 <br>
 
----
+
 
 
 
